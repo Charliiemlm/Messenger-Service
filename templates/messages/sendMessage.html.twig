@@ -4,21 +4,19 @@ Send Message
 {% endblock %}
 {% block body %}
 <div class="container">
-   <div class="row justify-content-center">
-      <div class="col-md-6">
-         <br /><br /><br />
+      <div class="col-md-12">
          <h1 class="text-center">Send Message</h1>
-         <br />
+         <br /><br><br>
          {% if app.user %}
          <h1 class="text-center">Welcome {{ app.user.name }}✅</h1>
-         <ul class="list-inline d-flex justify-content-center">
-            <li class="list-inline-item mr-3">
+         <ul class="list-inline">
+            <li class="list-inline-item">
                <a href="{{ path('login') }}" class="btn btn-secondary">Check Messages</a>
             </li>
-            <li class="list-inline-item mr-3">
+            <li class="list-inline-item">
                <a href="{{ path('sendMessage') }}" class="btn btn-primary">Send Message</a>
             </li>
-            <li class="list-inline-item">
+            <li class="list-inline-item offset-md-8">
                <a href="{{ path('logout') }}" class="btn btn-secondary">Logout</a>
             </li>
          </ul>
@@ -40,5 +38,4 @@ Send Message
          {% endif %}
       </div>
    </div>
-</div>
 {% endblock %}
