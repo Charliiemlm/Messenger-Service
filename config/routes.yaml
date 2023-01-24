@@ -24,7 +24,7 @@ login:
 
 logout:
     path: /logout
-    controller: App\Controller\index::index
+   
     
 checkMessage:
     path: /message/{id}
