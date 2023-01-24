@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}Registro de Usuarios{% endblock %}
+{% block body %}
+<div class="container">
+   <div class="row justify-content-center">
+      <div class="col-md-6">
+         <br><br><br>
+         <h1 class="text-center">Registro de usuario</h1>
+         <br>
+         {{ form_start(form) }}
+         <div class="form-group">
+            <label for="{{ form.name.vars.id }}">Nombre de usuario</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+         </div>
+         <div class="form-group">
+            <label for="{{ form.email.vars.id }}">Correo electrónico</label>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+         </div>
+         <div class="form-group">
+            <label for="{{ form.plainPassword.vars.id }}">Contraseña</label>
+            {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
+         </div>
+         <div class="d-flex justify-content-center">
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary m-3'}}) }}
+         </div>
+         {{ form_end(form) }}
+         {% for message in app.session.flashbag().get('message') %}
+         <div class="alert alert-success">{{ message }}</div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+{% endblock %}
