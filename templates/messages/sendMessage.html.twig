@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Send Message
+{% endblock %}
+{% block body %}
+<div class="container">
+   <div class="row justify-content-center">
+      <div class="col-md-6">
+         <br /><br /><br />
+         <h1 class="text-center">Send Message</h1>
+         <br />
+         {% if app.user %}
+         <h1 class="text-center">Welcome {{ app.user.name }}✅</h1>
+         <ul class="list-inline d-flex justify-content-center">
+            <li class="list-inline-item mr-3">
+               <a href="{{ path('login') }}" class="btn btn-secondary">Check Messages</a>
+            </li>
+            <li class="list-inline-item mr-3">
+               <a href="{{ path('sendMessage') }}" class="btn btn-primary">Send Message</a>
+            </li>
+            <li class="list-inline-item">
+               <a href="{{ path('logout') }}" class="btn btn-secondary">Logout</a>
+            </li>
+         </ul>
+         <div class="form-group">
+            {{ form_start(form) }}
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+            <div class="d-flex justify-content-center">
+               <input type="submit" class="btn btn-primary m-3" value="Send">
+            </div>
+            {{ form_end(form) }}
+         </div>
+         {% for message in app.session.flashbag().get('message') %}
+         <div class="alert alert-success">{{ message }}</div>
+         {% endfor %}
+         {% else %}
+         <script>
+            window.location.href = "{{ path('mainPage') }}"
+         </script>
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endblock %}
