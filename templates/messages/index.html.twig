@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Main Page
+{% endblock %}
+{% block body %}
+<div class="container">
+   <div class="row">
+      <div class="col-12">
+         <br />
+         <h1 class="text-center">Login de usuario</h1>
+         <br />
+         <!-- si hay usuario logeado-->
+         {% if app.user %}
+         <h1 class="text-center">Welcome {{ app.user.name }}✅</h1>
+         <br><br>
+         <ul class="list-inline d-flex justify-content-center">
+            <li class="list-inline-item">
+               <a href="{{ path('login') }}" class="btn btn-primary">Check Messages</a>
+            </li>
+            <li class="list-inline-item">
+               <a href="{{ path('sendMessage') }}" class="btn btn-secondary">Send Message</a>
+            </li>
+            <li class="list-inline-item offset-md-8">
+               <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12">
+         <div class="container mt-3">
+            <table class="table table-striped table-hover">
+               <tr class="table-primary">
+                  <th class="text-center">Email From</th>
+                  <th class="text-center">Destinatary</th>
+                  <th class="text-center">Subject</th>
+                  <th class="text-center">Time</th>
+                  <th class="text-center">Checked</th>
+                  <th class="text-center">Options</th>
+               </tr>
+               <!--    recorremos todos los mensajes con for y se pintan en una tabla-->
+               {% for message in messages %}
+               <tr>
+                  <td class="text-center">
+                     {{ message.emailfrom }}
+                  </td>
+                  <td class="text-center">
+                     {{ message.destinatary }}
+                  </td>
+                  <td class="text-center">
+                     {{ message.subject }}
+                  </td>
+                  <td class="text-center">
+                     {{ message.time|date('Y-m-d H:i:s') }}
+                  </td>
+                  <td class="text-center">
+                     {% if message.isChecked == 0 %}
+                     <i class="bi bi-x-circle"></i>
+                     {% else %}
+                     <span class="bi bi-check-square-fill"></span>
+                     {% endif %}
+                  </td>
+                  <td class="text-center">
+                     <div class="d-flex justify-content-between">
+                        <!-- boton que llama al metodo checkMessage que muestra el mensaje que se le envia por la URL con ´id´-->
+                        <a href="{{ path('checkMessage', {'id': message.id}) }}">
+                        <button class="btn btn-primary m-3">Check</button></a>
+                        <!-- boton que llama al metodo deleteMessage que borra el mensaje que se le envia por la URL con ´id´-->
+                        <a href="{{ path('deleteMessage', {'id': message.id}) }}">
+                        <button class="btn btn-danger m-3">Delete</button>
+                        </a>
+                     </div>
+                  </td>
+               </tr>
+               {% endfor %}
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% else %}
+<!-- si no hay usuario logeado se envia a la pagina principal-->
+<script>
+   window.location.href = "{{ path('optionsUser') }}"
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Login de Usuarios
+{% endblock %}
+{% block body %}
+<div class="container">
+   <div class="row justify-content-center">
+      <div class="col-md-6">
+         <br /><br /><br />
+         <h1 class="text-center">Login de usuario</h1>
+         <br />
+         <!-- En caso de error muestra que error tenemos al hacer el login-->
+         {% if error %}
+         <div class="alert alert-danger">{{ error.messagekey|trans(error.messageData, 'security') }}</div>
+         {% endif %}
+         <!-- en caso de que el usuario ya este logeado y se meta en esta pagina se le redirige a su pagina personal-->
+         {% if app.user %}
+         <script>
+            window.location.href = "{{ path('mainPage') }}"
+         </script>
+         <!--usuario no logeado-->
+         {% else %}
+         <!--pintamos formulario para el login-->
+         <form action="{{ path('login') }}" method="POST" class="form">
+            <div class="form-group">
+               <label for="username">Email</label>
+               <input type="email" name="_username" id="username" value="{{ lastUser }}" class="form-control" />
+            </div>
+            <div class="form-group">
+               <label for="password">Password</label>
+               <input type="password" name="_password" id="password" class="form-control" />
+            </div>
+            <div class="d-flex justify-content-center">
+               <input type="submit" value="Login" class="btn btn-primary m-3" />
+            </div>
+         </form>
+         <!-- cerrar if-->  
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endblock %}

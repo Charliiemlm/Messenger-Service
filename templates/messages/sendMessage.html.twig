@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Send Message
+{% endblock %}
+{% block body %}
+<div class="container">
+      <div class="col-md-12">
+         <h1 class="text-center">Send Message</h1>
+         <br /><br><br>
+ <!-- si hay usuario logeado-->
+         {% if app.user %}
+         <h1 class="text-center">Welcome {{ app.user.name }}✅</h1>
+         <ul class="list-inline">
+            <li class="list-inline-item">
+               <a href="{{ path('login') }}" class="btn btn-secondary">Check Messages</a>
+            </li>
+            <li class="list-inline-item">
+               <a href="{{ path('sendMessage') }}" class="btn btn-primary">Send Message</a>
+            </li>
+            <li class="list-inline-item offset-md-8">
+               <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
+            </li>
+         </ul>
+          <!-- Pintar Form creado desde el metodo sendMessage en index.php -->
+         <div class="form-group">
+            {{ form_start(form) }}
+            {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+            <div class="d-flex justify-content-center">
+               <input type="submit" class="btn btn-primary m-3" value="Send">
+            </div>
+             <!-- importante cerrar el form-->
+            {{ form_end(form) }}
+         </div>
+          <!-- uso del sesion flash para mostrar mensaje confirmando que el mensaje se ha enviado-->
+           <!-- se usa un for porque enviamos un array, solo tendremos 1 solo mensaje porque es una sesino flash y se borra automaticamente-->
+         {% for message in app.session.flashbag().get('message') %}
+         <div class="alert alert-success">{{ message }}</div>
+         {% endfor %}
+         
+         {% else %}
+          <!-- Usuario no logeado-->
+          <script>
+                        window.location.href = "{{ path('optionsUser') }}"
+            </script>
+         {% endif %}
+      </div>
+   </div>
+{% endblock %}
