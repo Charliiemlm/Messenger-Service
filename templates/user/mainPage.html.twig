@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Login de Usuarios
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <br /><br /><br />
+        <h1 class="text-center">Welcome to my App</h1>
+        <br />
+
+  <!-- en caso de que el usuario ya este logeado y se meta en esta pagina se le redirige a su pagina personal-->
+        {% if app.user %}
+          <script>
+            window.location.href = "{{ path('mainPage') }}"
+          </script>
+        {% else %}
+ <!-- opciones disponibles login - register -->
+        <br />
+        <ul class="list-inline d-flex justify-content-center">
+            <li class="list-inline-item">
+                <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
+            </li>
+            <li class="list-inline-item">
+                <a href="{{ path('register') }}" class="btn btn-secondary">Register</a>
+            </li>
+        </ul>
+    </div>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
