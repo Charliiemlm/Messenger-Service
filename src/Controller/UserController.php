@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Controller;
-use App\Form\RegisterType;
 use App\Form\RegistrationFormType;
-
 use App\Entity\User;
-use App\Form\LoginType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +29,7 @@ class UserController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            
             $em->persist($user);
             $em->flush($user);
             
@@ -48,13 +46,13 @@ class UserController extends AbstractController
     }
 
  
-    public function login(AuthenticationUtils $authenticationUtils, Request $request )
+    public function login(AuthenticationUtils $authenticationUtils )
     {
        #en caso de error en el login 
         $error=$authenticationUtils->getLastAuthenticationError();
         $lastUsername=$authenticationUtils->getLastUsername();
 
-
+        #datos a la vista
         return $this->render('user/login.html.twig',array(
             'error'=> $error,
             'lastUser'=> $lastUsername

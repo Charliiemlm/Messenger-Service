@@ -6,7 +6,7 @@ controllers:
 
 
 mainPage:
-    path: /
+    path: /userIn
     controller: App\Controller\index::index
 
     
@@ -22,10 +22,7 @@ login:
     path: /login
     controller: App\Controller\UserController::login
 
-logout:
-    path: /logout
-   
-    
+
 checkMessage:
     path: /message/{id}
     controller: App\Controller\index::checkMessage

@@ -9,28 +9,30 @@ Main Page
          <br />
          <h1 class="text-center">Login de usuario</h1>
          <br />
+         <!-- Si hay usuario logeado-->
          {% if app.user %}
          <h1>Welcome {{ app.user.name }}✅</h1>
          <br><br>
          <ul class="list-inline">
             <li class="list-inline-item">
+               <!-- rutas por name de ruta -->
                <a href="{{ path('login') }}" class="btn btn-primary">Check Messages</a>
             </li>
             <li class="list-inline-item">
                <a href="{{ path('sendMessage') }}" class="btn btn-secondary">Send Message</a>
             </li>
-
             <li class="list-inline-item offset-md-5">
-               <a href="{{ path('logout') }}" class="btn btn-secondary">Logout</a>
+               <a href="{{ path('app_logout') }}" class="btn btn-secondary">Logout</a>
             </li>
          </ul>
          <table class="table table-striped table-hover">
             <tr class="table-primary">
                <th class="text-center">Email From</th>
                <th class="text-center">Subject</th>
-                <th class="col-6 text-center">Message</th>
+               <th class="col-6 text-center">Message</th>
                <th class="text-center">Time</th>
             </tr>
+            <!-- recorrer los mensajes recibidos del controller-->
             {% for message in messages %}
             <tr>
                <td class="text-center">
@@ -45,25 +47,14 @@ Main Page
                <td class="text-center">
                   {{ message.time|date('Y-m-d H:i:s') }}
                </td>
-            
             </tr>
             {% endfor %}
          </table>
          {% else %}
-
-         {# quitaarrrrrrrrrrrr #}
-         <div class="text-center">
-            <h1>Welcome <i class="fas fa-check"></i></h1>
-            <br />
-            <ul class="list-inline">
-               <li class="list-inline-item">
-                  <a href="{{ path('checkMessage') }}" class="btn btn-primary">Login</a>
-               </li>
-               <li class="list-inline-item">
-                  <a href="{{ path('register') }}" class="btn btn-secondary">Register</a>
-               </li>
-            </ul>
-         </div>
+         <!-- si no hay usuario logeado se envia a la pagina principal-->
+         <script>
+            window.location.href = "{{ path('optionsUser') }}"
+         </script>
       </div>
    </div>
 </div>

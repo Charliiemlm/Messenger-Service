@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -150,8 +149,9 @@ class Messenger
      * @param \DateTime $time
      * @return self
      */
-    public function setTime(String $hola)
+    public function setTime(String $hola)#si o si tiene que recibir un parametro por lo que me lo invento para evitar errores
     {
+        #crear fecha actual para introducirla en la bdd
         $date = new \DateTime();
         $date->format('Y-m-d H:i:s');
 
